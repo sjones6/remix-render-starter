@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "name": "remix-app-template",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "build:css": "cross-env NODE_ENV=production tailwindcss -i ./app/styles/tailwind.css -o ./app/styles/app.css --minify",
+    "build:remix": "remix build",
+    "build": "npm run build:css && npm run build:remix",
+    "dev:db": "docker-compose up postgres",
+    "dev:css": "tailwindcss -i ./app/styles/tailwind.css -o ./app/styles/app.css --watch",
+    "dev:remix": "node -r dotenv/config node_modules/.bin/remix dev",
+    "dev": "concurrently \"npm:dev:*\"",
+    "migrate:create": "prisma migrate dev --create-only",
+    "migrate": "prisma migrate dev",
+    "postinstall": "remix setup node",
+    "prestart": "prisma migrate deploy",
+    "prettier": "prettier --single-quote --trailing-comma all --write \"src/**/*.{js,ts,tsx}\" --loglevel error",
+    "prisma:generate": "prisma generate",
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "start": "remix-serve build"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.5.0",
+    "@remix-run/react": "^1.0.6",
+    "@remix-run/serve": "^1.0.6",
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/line-clamp": "^0.2.2",
+    "@tailwindcss/typography": "^0.4.1",
+    "bcrypt": "^5.0.1",
+    "daisyui": "^1.16.2",
+    "dotenv": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "^1.0.6",
+    "tailwindcss": "^2.2.19"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.0.6",
+    "@types/bcrypt": "^5.0.0",
+    "@types/node": "^16.11.10",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^10.4.0",
+    "concurrently": "^6.4.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.4.4",
+    "prettier": "^2.5.0",
+    "prisma": "^3.5.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}

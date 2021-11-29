@@ -1,0 +1,45 @@
+services:
+  - type: web
+    env: node
+
+    # update this with the name of your project
+    name: remix-render-starter
+
+    # see service tiers: https://render.com/pricing/#services
+    plan: free
+
+    # auto-scaling is only available on paid tiers
+    # uncomment and tune if you want
+    # scaling:
+    #   minInstances: 1
+    #   maxInstances: 3
+    #   targetMemoryPercent: 60 
+    #   targetCPUPercent: 60
+    buildCommand: npm i --production=false && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: elephant
+          property: connectionString
+      - key: APP_NAME
+        value: remix-render
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 16.13.0
+      - key: PORT
+        value: 9000
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 16.13.0
+      - key: PORT
+        value: 9000
+      - key: SESSION_SECRET
+        generateValue: true
+
+databases:
+  - name: elephant
+    plan: free

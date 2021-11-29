@@ -1,0 +1,19 @@
+services:
+
+  postgres:
+    image: postgres
+    container_name: remix_db
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: admin
+      POSTGRES_DB: ${DB:-remix}
+    volumes:
+        - remix-db:/var/lib/backup/data
+
+volumes:
+  remix-db:
+    driver: local
